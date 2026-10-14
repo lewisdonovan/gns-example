@@ -1,0 +1,33 @@
+name: Update google-news-scraper
+
+on:
+  schedule:
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install latest google-news-scraper
+        run: npm install google-news-scraper@latest --save
+      - name: Check the example still loads
+        run: node --input-type=module -e "import gns from 'google-news-scraper'; if (typeof gns !== 'function') process.exit(1)"
+      - name: Commit if the version changed
+        run: |
+          if git diff --quiet package.json package-lock.json; then
+            echo "Already on the latest version"
+            exit 0
+          fi
+          VERSION=$(node -p "require('./package-lock.json').packages['node_modules/google-news-scraper'].version")
+          git config user.name "github-actions[bot]"
+          git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
+          git commit -am "chore: bump google-news-scraper to $VERSION"
+          git push
