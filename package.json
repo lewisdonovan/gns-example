@@ -10,6 +10,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "google-news-scraper": "^3.0.2"
+    "google-news-scraper": "^3.0.3"
   }
 }
