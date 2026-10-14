@@ -1,16 +1,15 @@
 {
-  "name": "gns-testing",
+  "name": "gns-example",
   "version": "1.0.0",
+  "private": true,
+  "description": "Minimal example of the google-news-scraper npm package",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1", 
     "start": "node index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "license": "MIT",
   "dependencies": {
-    "google-news-scraper": "^2.7.0"
+    "google-news-scraper": "^3.0.2"
   }
 }
